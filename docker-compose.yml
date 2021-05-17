@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   app:
-    build: ./service-application
+    image: ywoosang/codefridge-app
     env_file: ./.env
     networks:
       - webnet 
@@ -24,7 +24,7 @@ services:
     volumes:
      - ./service-application/api:/app/api
   db:
-    build: ./mysql-database
+    image: ywoosang/codefridge-mysqldb 
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
@@ -35,7 +35,7 @@ services:
     networks: 
       - webnet
   redisdb:
-    build: ./redis-database
+    image: ywoosang/codefridge-redisdb
     restart: always
     command: redis-server --requirepass ywoosang123 --port 6379
     ports : 
